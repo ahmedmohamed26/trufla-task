@@ -21,6 +21,7 @@ const Home = () => {
 	}
 	return (
         <section className='home'>
+            <h1>users table</h1>
 			<table className="table">
 				<thead> 
 					<tr>
@@ -32,7 +33,7 @@ const Home = () => {
 					</tr>
 				</thead>
                 <tbody>
-                {users?.map((user: Users,index) => {
+                {users?.map((user: Users,index:number) => {
                     return (
                         <tr key={index}>
 						<td data-column='id'>{index + 1}</td>
@@ -46,11 +47,6 @@ const Home = () => {
 					
 				</tbody>
 			</table>
-			{/* <ul>
-				{users?.map((user: Users) => {
-					return <li key={user.id}>{user?.name}</li>;
-				})}
-			</ul> */}
 		</section>
 	);
 };
