@@ -1,7 +1,8 @@
+@import '../../scss/variables.scss';
 .home {
     padding: 50px 0;
     h1{
-        color: aqua;
+        color: $mainColor;
         text-transform: capitalize;
     }
     table.table { 
@@ -36,6 +37,7 @@
     
         table { 
               width: 100%; 
+              position: relative;
         }
     
         /* Force table to not be like tables anymore */

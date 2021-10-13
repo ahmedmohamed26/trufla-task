@@ -1,0 +1,13 @@
+@import './variables.scss';
+@import './mixin.scss';
+.default-btn{
+    @include button;
+    background-color: $mainColor;
+    color: #fff;
+}
+
+.danger-btn{
+    @include button;
+    background-color: $dangerColor;
+    color: #fff;
+}

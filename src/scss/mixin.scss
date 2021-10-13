@@ -1,0 +1,11 @@
+@import './variables.scss';
+
+@mixin button {
+        border-radius: $border-curve;
+        padding: 10px 25px;
+        margin: 0 5px;
+        border: none;
+        text-transform: capitalize;
+        cursor: pointer;
+        transition: $transition;
+}
