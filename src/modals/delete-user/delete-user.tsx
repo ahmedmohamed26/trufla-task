@@ -3,7 +3,7 @@ import React from 'react';
 import './delete-user.scss';
 
 const Modal = (props: any) => {
-	const { show, children, close, deleteUser } = props;
+	const { show, children, close, deletePopUp } = props;
 	return (
 		<div>
 			<div
@@ -25,7 +25,7 @@ const Modal = (props: any) => {
 					<button className='danger-btn' onClick={close}>
 						No
 					</button>
-					<button className='default-btn' onClick={deleteUser}>
+					<button className='default-btn' onClick={deletePopUp}>
 						Yes
 					</button>
 				</div>
