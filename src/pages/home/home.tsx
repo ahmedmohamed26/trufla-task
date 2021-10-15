@@ -18,10 +18,14 @@ const Home = () => {
 		getInterests();
 	}, []);
 
+ 
+
+
 	const getUsers = () => {
 		getAllUsers()
 			.then((res: any) => {
 				setUsers(res);
+		
 			})
 			.catch((error: any) => {
 				throw new Error(error.message);
