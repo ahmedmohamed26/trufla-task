@@ -18,10 +18,3 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 * Enhance the project & make the component more reusable..
 * Create react router dom Enhance the project & make the component more reusable..
-
-
-## **Why I didn't finish the sort list and filter interests in table with id  ?**
-
-* I couldn't get enough free time at work.
-* Many companies have sent me their tasks while I am doing the work, most of them are beside my work.
-* I got the wrong link and I got another link last Tuesday
