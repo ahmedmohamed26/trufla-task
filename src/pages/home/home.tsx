@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './home.scss';
 import Users from '../../interface/user';
 import Interests from '../../interface/interests';
-import { getAllUsers } from '../../service/users';
-import { getAllInterests } from '../../service/interests';
 import Modal from '../../modals/delete-user/delete-user';
 
 const Home = () => {
+	const usersData = '../../api/users.json';
+	const usersInterests = '../../api/interests.json';
 	const [users, setUsers] = useState<Users[]>([]);
 	const [userId, setUserId] = useState<number>();
 	const [type, setType] = useState<string>();
@@ -14,36 +14,47 @@ const Home = () => {
 	const [isShowing, setIsShowing] = useState<boolean>(false);
 
 	useEffect(() => {
-		getUsers();
 		getInterests();
+		getUsers();
 	}, []);
-
- 
-
-
-	const getUsers = () => {
-		getAllUsers()
-			.then((res: any) => {
-				setUsers(res);
-		
-			})
-			.catch((error: any) => {
-				throw new Error(error.message);
-			});
-	};
-
-	const getInterests = () => {
-		getAllInterests()
-			.then((res: any) => {
-				setInterests(res);
-			})
-			.catch((error: any) => {
-				throw new Error(error.message);
-			});
-	};
 
 	const reducer = (previousValue: number, currentValue: number) =>
 		previousValue + currentValue;
+
+	const getInterests = async () => {
+		await fetch(usersInterests)
+			.then((results) => results.json())
+			.then((data) => {
+				setInterests(data);
+			})
+			.catch((error: any) => {
+				throw new Error(error.message);
+			});
+	};
+
+	const getFindInterset = (ids: any) => {
+		if (ids) {
+			let arr = interests.filter(function (interest: any) {
+				return ids.indexOf(interest.id) > -1;
+			});
+			return arr;
+		}
+	};
+
+	const getUsers = async () => {
+		await fetch(usersData)
+			.then((results) => results.json())
+			.then((data: any) => {
+				data.map(
+					(user: any) => (user['following'] = user?.following.reduce(reducer))
+				);
+				data.sort((a: any, b: any) => b.following - a.following);
+				setUsers(data);
+			})
+			.catch((error: any) => {
+				throw new Error(error.message);
+			});
+	};
 
 	const openModalHandler = (id: number, type: string) => {
 		setUserId(id);
@@ -97,11 +108,13 @@ const Home = () => {
 									<td data-column='id'>{index + 1}</td>
 									<td data-column='name'>{user?.name}</td>
 									<td data-column='interests'>
-										{user.interests ? user.interests : '-'}
+										{user.interests
+											? getFindInterset(user.interests)?.map(
+													(item) => item.name + '  '
+											  )
+											: '-'}
 									</td>
-									<td data-column='following'>
-										{user?.following.reduce(reducer)}
-									</td>
+									<td data-column='following'>{user?.following}</td>
 									<td>
 										<button
 											className='default-btn'
@@ -124,7 +137,6 @@ const Home = () => {
 			) : (
 				<h4 className='message-text'>not found users</h4>
 			)}
-
 			<Modal
 				className='modal'
 				show={isShowing}
